@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -157,32 +157,30 @@
       box-shadow: inset 0 0 0 3px rgba(255,255,255,0.7), 0 18px 32px rgba(171, 91, 118, 0.12);
     }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 12px 10px;
-      }
-
-      .card {
-        width: 94vw;
-        padding: 22px 14px 18px;
-        border-radius: 22px;
-      }
-
-      .photo-frame {
-        height: 180px;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 14px 18px;
-      }
-
-      #answerInput {
-        width: 100%;
-      }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .photo-frame img {
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 12px;
+    }
+
+    .memory-card {
+      overflow: hidden;
+      border-radius: 16px;
+      height: 120px;
+      background: #fdf1f5;
+      border: 2px solid rgba(255, 118, 152, 0.2);
+      box-shadow: 0 8px 18px rgba(255, 120, 156, 0.08);
+    }
+
+    .memory-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -217,11 +215,39 @@
       border-color: #ff4b72;
       box-shadow: 0 0 0 4px rgba(255, 75, 114, 0.12);
     }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px 10px;
+      }
+
+      .card {
+        width: 94vw;
+        padding: 22px 14px 18px;
+        border-radius: 22px;
+      }
+
+      .photo-frame {
+        height: 180px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px 18px;
+      }
+
+      #answerInput {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- PAGE 1: Landing Page -->
   <div class="card active" id="page1">
     <div class="love-badge">OUR LOVE STORY</div>
     <h1>Hey, My Love! 💕</h1>
@@ -232,7 +258,6 @@
     <button class="btn" onclick="nextPage(2)">เริ่มเลย! ✨</button>
   </div>
 
-  <!-- PAGE 2: Timeline Story -->
   <div class="card" id="page2">
     <h2>เรื่องราวของเรา 📖</h2>
     <div class="timeline">
@@ -252,7 +277,6 @@
     <button class="btn" onclick="nextPage(3)">ถัดไป ➔</button>
   </div>
 
-  <!-- PAGE 3: Interactive Quiz -->
   <div class="card" id="page3">
     <h2>ปลดล็อกความลับ 🔐</h2>
     <p>ตอบคำถามก่อนถึงจะผ่านไปหน้าสุดท้ายได้!</p>
@@ -262,20 +286,37 @@
     <button class="btn" onclick="checkAnswer()">ส่งคำตอบ 🎯</button>
   </div>
 
-  <!-- PAGE 4: Final Letter -->
   <div class="card" id="page4">
     <h2>ถึงคนพิเศษของเค้า 💌</h2>
     <p class="final-letter">
       ขอบคุณสำหรับทุกๆ ช่วงเวลาที่ผ่านมา อยู่สร้างรอยยิ้มและเรื่องราวดีๆ ด้วยกันไปนานๆ นะครับ รักเธอที่สุดเลย! 🥰
     </p>
+    <button class="btn" onclick="nextPage(5)">ดูภาพความทรงจำ 📸</button>
+  </div>
+
+  <div class="card" id="page5">
+    <div class="love-badge">MEMORY GALLERY</div>
+    <h2>ความทรงจำของเรา 📸</h2>
+    <div class="gallery-grid">
+      <div class="memory-card">
+        <img src="Screenshot%202026-04-01%20200502.png" alt="ความทรงจำ 1" />
+      </div>
+      <div class="memory-card">
+        <img src="Screenshot%202026-04-01%20200502.png" alt="ความทรงจำ 2" />
+      </div>
+      <div class="memory-card">
+        <img src="Screenshot%202026-04-01%20200502.png" alt="ความทรงจำ 3" />
+      </div>
+      <div class="memory-card">
+        <img src="Screenshot%202026-04-01%20200502.png" alt="ความทรงจำ 4" />
+      </div>
+    </div>
     <button class="btn" onclick="nextPage(1)">กลับไปหน้าแรก 🔄</button>
   </div>
 
   <script>
     function nextPage(pageNum) {
-      // ซ่อนทุกหน้า
       document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
-      // แสดงหน้าที่เลือก
       document.getElementById('page' + pageNum).classList.add('active');
     }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -33,7 +33,6 @@
     h1 { color: #ff4b72; margin-bottom: 10px; }
     p { font-size: 1.1rem; color: #666; }
 
-    /* --- Feature 1: Playful Dodge Button --- */
     .btn-group {
       display: flex;
       justify-content: center;
@@ -57,7 +56,6 @@
     .btn-yes { background-color: #ff4b72; color: white; box-shadow: 0 4px 10px rgba(255,75,114,0.3); }
     .btn-no { background-color: #e0e0e0; color: #666; position: absolute; transition: all 0.2s ease; }
 
-    /* --- Feature 2: Scratch Card --- */
     .scratch-container {
       position: relative;
       width: 280px;
@@ -90,7 +88,6 @@
       z-index: 2;
     }
 
-    /* --- Feature 3: Cursor Heart Particle --- */
     .heart-particle {
       position: fixed;
       pointer-events: none;
@@ -108,22 +105,20 @@
 </head>
 <body>
 
-  <!-- Card 1: Interactive Question -->
   <div class="container">
     <h1>ถามจริงนิดนึง... ❤️</h1>
     <p>รักเค้าไหมครับ?</p>
-    
+
     <div class="btn-group" id="btnGroup">
       <button class="btn btn-yes" id="yesBtn" onclick="sayYes()">รักที่สุด!</button>
       <button class="btn btn-no" id="noBtn" onmouseover="dodge()" onclick="dodge()">ไม่รัก</button>
     </div>
   </div>
 
-  <!-- Card 2: Scratch Card Coupon -->
   <div class="container">
     <h1>ขูดลุ้นรางวัลพิเศษ 🎁</h1>
     <p>ใช้นิ้วหรือเมาส์ขูดเพื่อเปิดกล่องของขวัญ!</p>
-    
+
     <div class="scratch-container">
       <div class="scratch-secret">
         <h3>🎟️ คูปองตามใจแฟน 1 วัน!</h3>
@@ -134,23 +129,19 @@
   </div>
 
   <script>
-    // --- Feature 1: Dodge Button Logic ---
     let yesScale = 1;
     function dodge() {
       const noBtn = document.getElementById('noBtn');
       const yesBtn = document.getElementById('yesBtn');
       const container = document.getElementById('btnGroup');
 
-      // Random position inside the container area
       const maxX = container.clientWidth - noBtn.clientWidth;
       const maxY = container.clientHeight - noBtn.clientHeight;
-      
+
       const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
       const randomY = Math.floor(Math.random() * maxY) - (maxY / 2);
 
       noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-
-      // Make YES button larger every time NO is attempted
       yesScale += 0.2;
       yesBtn.style.transform = `scale(${yesScale})`;
     }
@@ -159,11 +150,9 @@
       alert("รู้อยู่แล้วว่าต้องตอบรัก! 🥰❤️");
     }
 
-    // --- Feature 2: Scratch Card Canvas Logic ---
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Fill silver cover
     ctx.fillStyle = '#c5c5c5';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#666';
@@ -193,17 +182,15 @@
     canvas.addEventListener('touchend', () => isScratching = false);
     canvas.addEventListener('touchmove', scratch);
 
-    // --- Feature 3: Cursor Heart Trail ---
     document.addEventListener('mousemove', function(e) {
-      // Spawn heart every few movements
-      if (Math.random() > 0.3) return; 
+      if (Math.random() > 0.3) return;
 
       const heart = document.createElement('div');
       heart.className = 'heart-particle';
       heart.innerHTML = '❤️';
       heart.style.left = e.clientX + 'px';
       heart.style.top = e.clientY + 'px';
-      
+
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 1000);
     });
